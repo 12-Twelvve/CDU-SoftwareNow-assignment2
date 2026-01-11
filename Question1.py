@@ -1,21 +1,21 @@
-# Question 1 
-# Create a program that reads the text file "raw_text.txt", encrypts its contents using a 
-# simple encryption method, and writes the encrypted text to a new file 
-# "encrypted_text.txt". Then create a function to decrypt the content and a function to 
-# verify the decryption was successful. 
-# Requirements 
-# The encryption should take two user inputs (shift1, shift2), and follow these rules: 
-# • For lowercase letters: 
-# o If the letter is in the first half of the alphabet (a-m): shift forward by shift1 * 
-# shift2 positions 
-# o If the letter is in the second half (n-z): shift backward by shift1 + shift2 
-# positions 
-# • For uppercase letters: 
-# o If the letter is in the first half (A-M): shift backward by shift1 positions 
-# o If the letter is in the second half (N-Z): shift forward by shift2² positions 
-# (shift2 squared) 
-# • Other characters: 
-# o Spaces, tabs, newlines, special characters, and numbers remain 
+# Question 1
+# Create a program that reads the text file "raw_text.txt", encrypts its contents using a
+# simple encryption method, and writes the encrypted text to a new file
+# "encrypted_text.txt". Then create a function to decrypt the content and a function to
+# verify the decryption was successful.
+# Requirements
+# The encryption should take two user inputs (shift1, shift2), and follow these rules:
+# • For lowercase letters:
+# o If the letter is in the first half of the alphabet (a-m): shift forward by shift1 *
+# shift2 positions
+# o If the letter is in the second half (n-z): shift backward by shift1 + shift2
+# positions
+# • For uppercase letters:
+# o If the letter is in the first half (A-M): shift backward by shift1 positions
+# o If the letter is in the second half (N-Z): shift forward by shift2² positions
+# (shift2 squared)
+# • Other characters:
+# o Spaces, tabs, newlines, special characters, and numbers remain
 # unchanged
 
 # Main Functions to Implement
@@ -81,10 +81,10 @@ def decryption(encrypted_file, shift1, shift2):
     return "decrypted_text.txt"
 
 def verification(raw_file, decrypted_file):
-    print("Verifying decryption...") 
+    print("Verifying decryption...")
     with open(raw_file, 'r') as file1, open(decrypted_file, 'r') as file2:
         raw_content = file1.read()
-        decrypted_content = file2.read()    
+        decrypted_content = file2.read()
     if raw_content == decrypted_content:
         print("Decryption successful: The decrypted content matches the original.")
     else:
@@ -105,7 +105,7 @@ def main(raw_file):
     except Exception as e:
         print(f"Error during encryption: {e}")
         return
-    
+
 
 
 if __name__ == "__main__":
