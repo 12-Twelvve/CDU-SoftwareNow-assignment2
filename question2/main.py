@@ -1,3 +1,4 @@
+from posix import stat
 import pandas as pd
 import glob
 import os
@@ -32,18 +33,46 @@ def ses_avg(df):
     result = f"Summer: {round(season_avgs["Summer"], 2)}°C\nAutumn: {round(season_avgs["Autumn"], 2)}°C\nWinter: {round(season_avgs["Winter"], 2)}°C\nSpring: {round(season_avgs["Spring"], 2)}°C\n"
     create_file(str(result), "./results/avg_temperature.txt")
 
-def temp_range():
+def temp_range(df):
     # Find the station(s) with the largest temperature range (difference
     # between the highest and lowest temperature ever recorded at that station). Save the
     # results to "largest_temp_range_station.txt".
-    print("here in the temperature average")
+
+    months = ["December", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November"]
+
+    # calculating max and min
+    df["max_temp"] = df[months].max(axis=1) # .max() for row calculation of the max
+    df["min_temp"] = df[months].min(axis=1)
+    df["temp_range"] = df["max_temp"] - df["min_temp"]
+    largest_range = df["temp_range"].max()
+
+    result = df.loc[df["temp_range"] == largest_range, ["STATION_NAME", "temp_range", "max_temp", "min_temp"]]
+    create_file(str(result), "./results/temp_range.txt")
 
 
-def temp_stability():
+
+def temp_stability(df):
     # Find which station(s) have the most stable temperatures
     # (smallest standard deviation) and which have the most variable temperatures (largest
     # standard deviation). Save the results to "temperature_stability_stations.txt".
-    print("here in the temperature stability")
+    # print("here in the temperature stability")
+    months = ["December", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November"]
+
+    # calculating standard deviation, min -> best, max -> worst
+    df["temp_deviation"] = df[months].std(axis=1)
+
+    min_std = df["temp_deviation"].min()
+    stable_station =df[df["temp_deviation"]==min_std]["STATION_NAME"]
+    stable_list = stable_station.tolist()
+    max_std = df["temp_deviation"].max()
+    var_station= df[df["temp_deviation"]==max_std]["STATION_NAME"]
+    var_list = var_station.tolist()
+
+    result = {
+        "Most Stable": {station: {"std": float(min_std)} for station in stable_list },
+        "Variable": {station: {"std": float(max_std)} for station in var_list }
+    }
+    create_file(str(result), "./results/temperature_stability.txt")
 
 
 
@@ -64,5 +93,5 @@ if __name__ =="__main__":
     # print(actual_df.head())
     # functions calls
     sessional_avg = ses_avg(actual_df)
-    # temperature_range = temp_range()
-    # temp_stability = temp_stability()
+    temperature_range = temp_range(actual_df)
+    temp_stability = temp_stability(actual_df)

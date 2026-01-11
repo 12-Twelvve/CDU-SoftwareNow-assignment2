@@ -1,0 +1,1 @@
+{'Most Stable': {'DARWIN-AIRPORT': {'std': 0.7102816342831899}}, 'Variable': {'WAGGA-WAGGA-AMO': {'std': 7.675713124504912}}}
