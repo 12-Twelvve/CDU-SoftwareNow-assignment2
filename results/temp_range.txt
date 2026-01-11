@@ -1,0 +1,2 @@
+        STATION_NAME  temp_range  max_temp  min_temp
+661  WAGGA-WAGGA-AMO       21.07     36.55     15.48
