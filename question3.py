@@ -24,4 +24,16 @@
 # Enter the recursion depth: 3
 
 import turtle
-
+def polygon_edge(t, length, depth):
+    if depth == 0:
+        t.forward(length)
+    else:
+        length /= 3
+        polygon_edge(t, length, depth - 1)
+        t.left(60)
+        polygon_edge(t, length, depth - 1)
+        t.right(120)
+        polygon_edge(t, length, depth - 1)
+        t.left(60)
+        polygon_edge(t, length, depth - 1)
+        
