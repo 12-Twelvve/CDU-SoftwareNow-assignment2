@@ -24,6 +24,7 @@
 # Enter the recursion depth: 3
 
 import turtle
+#recursive
 def polygon_edge(t, length, depth):
     if depth == 0:
         t.forward(length)
@@ -37,9 +38,22 @@ def polygon_edge(t, length, depth):
         t.left(60)
         polygon_edge(t, length, depth - 1)
 
-    def polygon(t, sides, length, depth):
-        polygon_angle = 360 / sides
-        for _ in range(sides):
-            polygon_edge(t, length, depth)
-            t.right(polygon_angle)
+def polygon(t, sides, length, depth):
+    polygon_angle = 360 / sides
+    for _ in range(sides):
+        polygon_edge(t, length, depth)
+        t.right(polygon_angle)
         
+def main():
+    #User input
+    polygon_sides = int(input("Enter the number of sides: "))
+    polygon_length = int(input("Enter the side length: "))
+    polygon_depth = int(input("Enter the recursion depth: "))
+
+    t = turtle.Turtle()
+    t.speed(0)
+    polygon(t, polygon_sides, polygon_length, polygon_depth)
+    turtle.done()
+
+if __name__ == "__main__":
+    main()
