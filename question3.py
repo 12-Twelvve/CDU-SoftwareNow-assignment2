@@ -36,4 +36,10 @@ def polygon_edge(t, length, depth):
         polygon_edge(t, length, depth - 1)
         t.left(60)
         polygon_edge(t, length, depth - 1)
+
+def polygon(t, sides, length, depth):
+    polygon_angle = 360 / sides
+    for _ in range(sides):
+        polygon_edge(t, length, depth)
+        t.right(polygon_angle)
         
