@@ -49,11 +49,19 @@ def main():
     polygon_sides = int(input("Enter the number of sides: "))
     polygon_length = int(input("Enter the side length: "))
     polygon_depth = int(input("Enter the recursion depth: "))
+    
+    if polygon_sides <= 0:
+        print("Number of sides must be greater than 0.")
+    elif polygon_length <= 0:
+        print("Side length must be greater than 0.")
+    elif polygon_depth < 0:
+        print("Recursion depth cannot be negative.")
+    else:
 
-    t = turtle.Turtle()
-    t.speed(0)
-    polygon(t, polygon_sides, polygon_length, polygon_depth)
-    turtle.done()
+        t = turtle.Turtle()
+        t.speed(0)
+        polygon(t, polygon_sides, polygon_length, polygon_depth)
+        turtle.done()
 
 if __name__ == "__main__":
     main()
